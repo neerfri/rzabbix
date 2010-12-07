@@ -16,6 +16,6 @@ To use RZabbix:
 
 ## External Links
 
-Zabbix Monitoring Server
 
-http://zabbix.com
+[Zabbix Monitoring Server](http://zabbix.com).
+
