@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>ZABBIX</title>
+	<meta name="Author" content="ZABBIX SIA" />
+	<link rel="shortcut icon" href="images/general/zabbix.ico" />
+	<link rel="stylesheet" type="text/css" href="css.css" />
+<!--[if IE 6]>
+	<script type="text/javascript" src="js/ie6fix.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles/ie.css" />
+<![endif]-->
+
+<link rel="stylesheet" type="text/css" href="styles/default.css" />
+<!--[if IE 6]><link rel="stylesheet" type="text/css" href="styles/ie_default.css" /><![endif]-->
+<script type="text/javascript">	var PHP_TZ_OFFSET = -28800;</script>
+<script type="text/javascript" src="jsLoader.php?ver=1.8.3&lang=en_gb"></script>
+</head>
+<body onload="zbxCallPostScripts();">
+<table class="page_header" cellspacing="0" cellpadding="5"><tr><td class="page_header_l"><a class="image" href="http://www.zabbix.com/" target="_blank"><div class="zabbix_logo">&nbsp;</div></a></td><td class="page_header_r" width="100%"><a class="small_font" href="http://www.zabbix.com/documentation/" target="_blank">Help</a>|<a class="small_font" href="http://www.zabbix.com/support.php" target="_blank">Get support</a>|<a class="small_font" href="/?print=1&amp;sid=670f2d8f8a4e946d">Print</a>|<a class="small_font" href="index.php?reconnect=1">Login</a></td></tr></table><div id="mmenu"><table cellspacing="0" cellpadding="0" style="width: 100%;"><tr><td><table class="menu" cellspacing="0" cellpadding="5"><tr><td class="horizontal_menu_n" id="view" onclick="javascript: redirect('dashboard.php');" onmouseover="javascript: MMenu.mouseOver(&quot;view&quot;);" onmouseout="javascript: MMenu.mouseOut();">Monitoring</td><td class="horizontal_menu_n" id="cm" onclick="javascript: redirect('hostprofiles.php');" onmouseover="javascript: MMenu.mouseOver(&quot;cm&quot;);" onmouseout="javascript: MMenu.mouseOut();">Inventory</td><td class="horizontal_menu_n" id="reports" onclick="javascript: redirect('report2.php');" onmouseover="javascript: MMenu.mouseOver(&quot;reports&quot;);" onmouseout="javascript: MMenu.mouseOut();">Reports</td></tr></table></td><td align="right"></td></tr></table><table class="sub_menu" cellspacing="0" cellpadding="5"><tr><td><div id="sub_view" onmouseover="javascript: MMenu.submenu_mouseOver();" onmouseout="javascript: MMenu.mouseOut();" style="display: none;"><a class="highlight nowrap" href="dashboard.php?sid=670f2d8f8a4e946d">Dashboard</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="overview.php?sid=670f2d8f8a4e946d">Overview</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="httpmon.php?sid=670f2d8f8a4e946d">Web</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="latest.php?sid=670f2d8f8a4e946d">Latest data</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="tr_status.php?sid=670f2d8f8a4e946d">Triggers</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="events.php?sid=670f2d8f8a4e946d">Events</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="charts.php?sid=670f2d8f8a4e946d">Graphs</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="screens.php?sid=670f2d8f8a4e946d">Screens</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="maps.php?sid=670f2d8f8a4e946d">Maps</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="srv_status.php?sid=670f2d8f8a4e946d">IT services</a><span class="divider">&nbsp; | &nbsp;</span></div><div id="sub_cm" onmouseover="javascript: MMenu.submenu_mouseOver();" onmouseout="javascript: MMenu.mouseOut();" style="display: none;"><a class="highlight nowrap" href="hostprofiles.php?sid=670f2d8f8a4e946d">Hosts</a><span class="divider">&nbsp; | &nbsp;</span></div><div id="sub_reports" onmouseover="javascript: MMenu.submenu_mouseOver();" onmouseout="javascript: MMenu.mouseOut();" style="display: none;"><a class="highlight nowrap" href="report2.php?sid=670f2d8f8a4e946d">Availability report</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="report5.php?sid=670f2d8f8a4e946d">Most busy triggers top 100</a><span class="divider">&nbsp; | &nbsp;</span><a class="highlight nowrap" href="report6.php?sid=670f2d8f8a4e946d">Bar reports</a><span class="divider">&nbsp; | &nbsp;</span></div><div id="sub_empty" style="display: block;">&nbsp;</div></td></tr></table></div><br/>
+<form method="post" action="index.php?login=1" enctype="multipart/form-data" accept-charset="utf-8" name="web.index.login" id="web.index.login"><table class="formtable" cellspacing="0" cellpadding="1" align=""><tr class="header"><td class="form_row_first" colspan="2"><div class="iconhelp menu_icon" title="http://www.zabbix.com/documentation" onclick="window.open(&quot;http://www.zabbix.com/documentation/&quot;);" style="float:right; text-decoration: none;">&nbsp;</div>Login</td></tr><input type="hidden" name="sid" id="sid" value="670f2d8f8a4e946d" /><input type="hidden" name="form_refresh" id="form_refresh" value="1" /><input type="hidden" name="form" id="form" value="1" /><tr><td class="form_row_l">Login&nbsp;name</td><td class="form_row_r"><input class="biginput" name="name" id="name" type="text" size="20" value="" style="width: 150px" /></td></tr><tr><td class="form_row_l">Password</td><td class="form_row_r"><input class="biginput" name="password" id="password" type="password" size="20" value="" style="width: 150px" /></td></tr><tr class="footer"><td class="form_row_last" colspan="2">&nbsp;<input type="submit" value="Enter" class="button" id="enter" name="enter" /></td></tr></table></form><script type="text/javascript">// <![CDATA[
+document.forms["web.index.login"].elements["name"].focus();
+// ]]></script><table class="page_footer" cellspacing="0" cellpadding="1"><tr><td class="page_footer_l"><a class="highlight" href="http://www.zabbix.com">Zabbix&nbsp;1.8.3&nbsp;Copyright 2001-2010 by&nbsp;SIA Zabbix</a></td><td class="page_footer_r"><span class="divider">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="footer_sign">Connected as&nbsp;'guest'</span></td></tr></table><script type="text/javascript">// <![CDATA[
+var page_refresh = null;
+function zbxCallPostScripts(){
+var msglistid = initMessages({});
+cookie.init();
+chkbxRange.init();
+if(IE6){ie6pngfix.run(false);}
+}
+
+// ]]></script></body>
+</html>
