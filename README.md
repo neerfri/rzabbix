@@ -6,13 +6,13 @@ RZabbix is a ruby client for Zabbix API access.
 
 To install RZabbix, run the following command:
 
-  $ gem install rzabbix 
+    gem install rzabbix 
   
 To use RZabbix:
 
-  $ gem 'rzabbix'
-  $ zbx = RZabbix::Base.new("zabbix.example.com", "user", "password")
-  $ host = zbx.find_host("my-dns-example.com")
+    gem 'rzabbix'
+    zbx = RZabbix::Base.new("zabbix.example.com", "user", "password")
+    host = zbx.find_host("my-dns-example.com")
 
 ## External Links
 
