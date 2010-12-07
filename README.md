@@ -11,8 +11,8 @@ To install RZabbix, run the following command:
 To use RZabbix:
 
     gem 'rzabbix'
-    zbx = RZabbix::Base.new("zabbix.example.com", "user", "password")
-    host = zbx.find_host("my-dns-example.com")
+    RZabbix::Base.set_credentials("zabbix.example.com", "user", "password")
+    host = RZabbix::Host.find("my-dns-example.com")
 
 ## External Links
 
