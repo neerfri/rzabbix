@@ -2,8 +2,10 @@ module RZabbix
   
   class Base
     
-    cattr_accessor :credentials
-    cattr_accessor :use_ssl
+    class << self
+      attr_accessor :credentials
+      attr_accessor :use_ssl
+    end
     
     self.use_ssl = false
     
@@ -11,8 +13,37 @@ module RZabbix
       self.credentials = {:api_host=>api_host, :api_user=>api_user, :api_password=>api_password}
     end
     
-    def self.perform_request()
+    def self.auth
+  
+      auth_message = {
+        'auth' => nil,
+        'method' => 'user.authenticate',
+        'params' => {
+          'user' => credentials[:api_user],
+          'password' => credentials[:api_password],
+          '0' => '0'
+        }
+      }
+  
+      auth_id = do_request(auth_message)
+  
+      return auth_id
+    end
+    
+    
+    def self.perform_request(action, params)
+      message = message_for(self.name.downcase, action, params)
+      message['id'] = rand 100_000
+      message['jsonrpc'] = '2.0'
+      message['auth'] = auth()
       
+    end
+    
+    def self.message_for(controller, action, params = {})
+      { 
+        'method' => "#{controller}.#{action}",
+        'params' => params
+      }
     end
     
     def do_request(message)
@@ -69,23 +100,6 @@ module RZabbix
     def send_request(message)
       message['auth'] = auth()
       do_request(message)
-    end
-  
-    def auth()
-  
-      auth_message = {
-        'auth' => nil,
-        'method' => 'user.authenticate',
-        'params' => {
-          'user' => @api_user,
-          'password' => @api_password,
-          '0' => '0'
-        }
-      }
-  
-      auth_id = do_request(auth_message)
-  
-      return auth_id
     end
   
     def merge_opt(a, b)
