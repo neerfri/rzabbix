@@ -1,8 +1,8 @@
-= RZabbix
+# RZabbix
 
 RZabbix is a ruby client for Zabbix API access.
 
-= Installation Instructions
+## Installation Instructions
 
 To install RZabbix, run the following command:
 
@@ -14,7 +14,7 @@ To use RZabbix:
   $ zbx = RZabbix::Base.new("zabbix.example.com", "user", "password")
   $ host = zbx.find_host("my-dns-example.com")
 
-= External Links
+## External Links
 
 Zabbix Monitoring Server
 
