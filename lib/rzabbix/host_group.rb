@@ -2,35 +2,53 @@ module RZabbix
   
   class HostGroup < Base
     
-    attr_accessor :attributes
-    
     def self.find_by_name(name)
-      groups = perform_request(:get, 'filter' => {'name'=>name}, "output"=>"extend")
-      self.new(groups.first) unless groups.empty?
+      groups = perform_request(:hostgroup, :get, :filter => {:name=>name}, :output=>"extend")
+      self.new(groups.first.rzbx_recursively_symbolize_keys) unless groups.empty?
     end
     
-    def self.resource_name
-      "hostgroup"
-    end
-    
-    def default_attributes
-      {                           
-        :hostid=>nil,             #int	    Host ID	
-        :host=>nil,               #string	  Host name.
-        :port=>10050,             #int	    Port number.	
-        :status=>0,               #int	    Host Status.	
-        :useip=>0,                #int	    Use IP.	
-        :dns=>'',                 #string	  DNS.	
-        :ip=>'0.0.0.0',           #string	  IP.	
-        :proxy_hostid=> 0,        #int	    Proxy Host ID.	
-        :useipmi=> 0 ,            #int	    Use IPMI.	
-        :ipmi_ip=>'',             #string	  IPMAI IP.	
-        :ipmi_port=>623,          #int	    IPMI port.	
-        :ipmi_authtype=>0,        #int	    IPMI authentication type.	
-        :ipmi_privilege=>0,       #int	    IPMI privilege.	
-         :ipmi_username=>'',      #string	  IPMI username.	
-         :ipmi_password=>''       #string	  IPMI password.
+    def self.default_attributes
+      {                      
+        :nodeids => nil,
+        :groupids => nil,
+        :hostids => nil,
+        :templateids => nil,
+        :graphids => nil,
+        :triggerids => nil,
+        :maintenanceids => nil,
+        :monitored_hosts => nil,
+        :templated_hosts => nil,
+        :real_hosts => nil,
+        :not_proxy_hosts => nil,
+        :with_items => nil,
+        :with_monitored_items => nil,
+        :with_historical_items => nil,
+        :with_triggers => nil,
+        :with_monitored_triggers => nil,
+        :with_httptests => nil,
+        :with_monitored_httptests => nil,
+        :with_graphs => nil,
+        :editable => nil,
+        :nopermissions => nil
+        
+#        :filter => nil,
+#        :pattern => '',
+#        
+#        :output => Connection::API_OUTPUT_REFER,
+#        :extendoutput => nil,
+#        :select_hosts => nil,
+#        :select_templates => nil,
+#        :count => nil,
+#        :preservekeys => nil,
+#        :sortfield => '',
+#        :sortorder => '',
+#        :limit => nil,
+#        :limitSelects => nil
       }
+    end
+    
+    def to_json(*args)
+      self.attributes.to_json(*args)
     end
     
   end

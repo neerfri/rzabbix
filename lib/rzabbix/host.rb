@@ -2,49 +2,30 @@ module RZabbix
   
   class Host < Base
     
-    attr_accessor :attributes
-                                        
-    # attr_accessor :hostid           
-    # attr_accessor :host             
-    # attr_accessor :port             
-    # attr_accessor :status           
-    # attr_accessor :useip            
-    # attr_accessor :dns              
-    # attr_accessor :ip               
-    # attr_accessor :proxy_hostid     
-    # attr_accessor :useipmi          
-    # attr_accessor :ipmi_ip          
-    # attr_accessor :ipmi_port        
-    # attr_accessor :ipmi_authtype    
-    # attr_accessor :ipmi_privilege   
-    # attr_accessor :ipmi_username    
-    # attr_accessor :ipmi_password	  
-  
+    def self.find(host_id)
+      hosts = perform_request(:host, :get, :hostids=>[host_id], :output=>"extend")
+      self.new(hosts.first.rzbx_recursively_symbolize_keys) unless hosts.empty?
+    end
   
     def self.find_host_id_by_hostname(hostname)
-      hosts = perform_request(:get, 'filter' => {'host'=>hostname})
-      hosts.first["hostid"]
+      hosts = perform_request(:host, :get, :filter => {:host=>hostname})
+      hosts.first[:hostid]
     end
     
     def self.find_by_hostname(hostname)
-      #host_id = find_host_id_by_hostname(hostname)
-      hosts = perform_request(:get, 'filter' => {'host'=>hostname}, "output"=>"extend")
+      hosts = perform_request(:host, :get, :filter => {:host=>hostname}, :output=>"extend")
       self.new(hosts.first) unless hosts.empty?
     end
     
     def self.create(attributes)
-      groups = attributes.delete(:groups)
-      hosts = perform_request(:create, "host data"=>attributes, "groups"=>groups)
-      self.new(attributes)
+      host = self.new(attributes)
+      result = perform_request(:host, :create, host)
+      result && result[:hostids] ? self.find(result[:hostids].first) : nil
     end
     
-    def self.resource_name
-      "host"
-    end
-    
-    def default_attributes
-      {                           
-        :hostid=>nil,             #int	    Host ID	
+    def self.default_attributes
+      {
+        #:hostid=>nil,             #int	    Host ID	
         :host=>nil,               #string	  Host name.
         :port=>10050,             #int	    Port number.	
         :status=>0,               #int	    Host Status.	
@@ -57,9 +38,24 @@ module RZabbix
         :ipmi_port=>623,          #int	    IPMI port.	
         :ipmi_authtype=>0,        #int	    IPMI authentication type.	
         :ipmi_privilege=>0,       #int	    IPMI privilege.	
-         :ipmi_username=>'',      #string	  IPMI username.	
-         :ipmi_password=>''       #string	  IPMI password.
+        :ipmi_username=>'',      #string	  IPMI username.	
+        :ipmi_password=>''       #string	  IPMI password.
       }
+    end
+    
+    def to_hash(*args)
+      host_hash = self.attributes.inject({}) do |hash, (attr, v)|
+        case attr.to_sym
+          when :groups
+            hash[:groups] = v.map {|g| { :groupid=>g.attributes[:groupid]}}
+          when :templates
+            hash[:templates] = v.map {|t| {:templateid=>t.attributes[:templateid]}}
+          else
+            hash[attr] = v
+        end
+        hash
+      end
+      host_hash
     end
     
   end
