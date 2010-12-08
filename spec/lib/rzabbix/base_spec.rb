@@ -4,23 +4,9 @@ include RZabbix
 
 describe Base do
   
-  describe "use_ssl accessor" do
-    it "should have use_ssl set to false by default" do
-      RZabbix::Base.use_ssl.should == false
-    end
-  end
-  
-  describe "set_credentials method" do
-    it "should set the value in the class accessor" do
-      RZabbix::Base.set_credentials("host", "user", "pass")
-      RZabbix::Base.credentials.should == {:api_url=>"host", :api_user=>"user", :api_password=>"pass"}
-    end
-    
-    it "will not fail when I finish it"
-  end
-  
   describe "perform_request method" do
-    #RZabbix::Base.perform_request(:get, {})
+    RZabbix::Connection.should_receive(:perform_request).with(:get, {})
+    RZabbix::Base.perform_request(:controller, :action, {})
   end
   
 end
