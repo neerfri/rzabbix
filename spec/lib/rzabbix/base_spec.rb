@@ -13,12 +13,14 @@ describe Base do
   describe "set_credentials method" do
     it "should set the value in the class accessor" do
       RZabbix::Base.set_credentials("host", "user", "pass")
-      RZabbix::Base.credentials.should == {:api_host=>"host", :api_user=>"user", :api_password=>"pass"}
+      RZabbix::Base.credentials.should == {:api_url=>"host", :api_user=>"user", :api_password=>"pass"}
     end
+    
+    it "will not fail when I finish it"
   end
   
   describe "perform_request method" do
-    RZabbix::Base.perform_request(:get, {})
+    #RZabbix::Base.perform_request(:get, {})
   end
   
 end
